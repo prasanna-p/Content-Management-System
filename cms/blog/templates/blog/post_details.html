@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="web_page_body">
+    <div class="top_spacing">
+    <div class="card_details">
+        <div class="card_image">
+            <img class="Main_image_card"
+                src="{{ post.image.url }}"
+                alt="notfound">
+        </div>
+        <div class="card_hedding_details">
+            <h1 class="card_heading">{{ post.title }}</h1>
+            <div class="card_author_date">
+                <p class="blog_card_author_name">
+                   {{ post.author.name }}
+                    <span class="blogcard_publish_date">
+                        |
+                        {{ post.date|date:"d M Y" }}
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="blog_description">
+            <div>
+                <p class="para_class">
+                    {{ post.content }}
+                </p> 
+            </div>
+        </div>
+            <hr class="devider">
+            <div class="blog_author blog_A_sec">
+                <div class="blog_author_image ">
+                    <img  class="blog_author_image_card" src="https://edyoda.s3.amazonaws.com/media/profile-picture/0.png" alt="EdYoda-Profile-Pic">
+                </div>
+                <div class="blog_author_details ">
+                    <p class="blog_author_name">EdYoda</p>
+                    <p class="blog_author_description">Edyoda is an open platform to learn technology and
+                        share tech content</p>
+                </div>
+            </div>
+            <div class="blog_button">
+                <div class="button">Artificial-Intelligence</div>
+            </div>
+        
+    </div>
+</div>
+</div>
+{% endblock content %}

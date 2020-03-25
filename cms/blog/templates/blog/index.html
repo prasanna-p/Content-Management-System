@@ -1,0 +1,52 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="web_page_body">
+    <div class="web_page_body2">
+        <div class="post_bar">
+            <h3 class="post_hedding">Latest Posts</h3>
+        </div>
+        <div class="filter_sec">
+            <div class="filter_sec_icon">
+                <span><i class="fas fa-filter icon_img"></i></span>
+            </div>
+            <p class="filter_content">Filter by Category</p>
+        </div>
+        <div class="button_section">
+           <a href="stories"><div class="buttons">All</div></a> 
+            {% for cat in category %}
+            <a href="{{ cat.id }}"><div class="buttons">{{ cat.name }}</div></a> 
+            {% endfor %}
+        </div>
+        <div class="blog_cards">
+            {% for post in posts %}
+            <div class="blog_card_container">
+                <a class="blog_cards_link" href="post_info/{{ post.id }}">
+                    <div class="blog_card_container_image_section">
+                        <img class="image_card"
+                            src="{{ post.image.url }}"
+                            alt="not found">
+                    </div>
+                    <div class="blog_card_container_description">
+                        <h3 class="blog_card_hedding">
+                            <div class="blog_card_hedding_div">{{ post.title|truncatechars:30 }}</div>
+                        </h3>
+                        <p class="blog_card_author_name">
+                            {{ post.author.name }}
+                            <span class="blogcard_publish_date">
+                                |
+                                {{ post.date|date:"d M Y" }}
+                            </span>
+                        </p>
+                        <div class="blog_card_description">
+                            <div class="blog_card_description_div">
+                                {{ post.content|truncatechars:100 }}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div> 
+            {% endfor %}   
+        </div>
+    </div>
+</div>
+{% endblock content %}

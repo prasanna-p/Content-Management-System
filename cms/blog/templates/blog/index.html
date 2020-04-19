@@ -12,9 +12,13 @@
             <p class="filter_content">Filter by Category</p>
         </div>
         <div class="button_section">
-           <a href="stories"><div class="buttons">All</div></a> 
+            <a href="stories">
+                <div class="buttons">All</div>
+            </a>
             {% for cat in category %}
-            <a href="{{ cat.id }}"><div class="buttons">{{ cat.name }}</div></a> 
+            <a href="{{ cat.id }}">
+                <div class="buttons">{{ cat.name }}</div>
+            </a>
             {% endfor %}
         </div>
         <div class="blog_cards">
@@ -23,9 +27,7 @@
                 <!-- <a class="blog_cards_link" href="{% url 'post_detail' post.slug %}"> -->
                 <a class="blog_cards_link" href="{{ post.get_absolute_url }}">
                     <div class="blog_card_container_image_section">
-                        <img class="image_card"
-                            src="{{ post.image.url }}"
-                            alt="not found">
+                        <img class="image_card" src="{{ post.image.url }}" alt="not found">
                     </div>
                     <div class="blog_card_container_description">
                         <h3 class="blog_card_hedding">
@@ -45,8 +47,8 @@
                         </div>
                     </div>
                 </a>
-            </div> 
-            {% endfor %}   
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

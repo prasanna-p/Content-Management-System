@@ -6,31 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://kit.fontawesome.com/db966050f5.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins|Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'blog/css/main.css' %}">
 </head>
 
 <body>
     <div class="sections">
-    <div class="topbar">
-        <div class="topbar_sections">
-            <div class="topbar_edyoda topbar_edyoda_1">EDYODA</div>
-            <p class="logo_stories">Stories</p>
-        </div>
-        <div class="topbar_sections">
-            <br>
-            <div class="topbar_sections_cat_wrapper">
-                <div class="topbar_sections_cat">Explore catagories </div>
-                <span><i class="fas fa-chevron-down cat_icon"></i></span>
+        <div class="topbar">
+            <div class="topbar_sections">
+                <div class="topbar_edyoda topbar_edyoda_1">EDYODA</div>
+                <p class="logo_stories">Stories</p>
+            </div>
+            <div class="topbar_sections">
+                <br>
+                <div class="topbar_sections_cat_wrapper">
+                    <div class="topbar_sections_cat">Explore catagories </div>
+                    <span><i class="fas fa-chevron-down cat_icon"></i></span>
+                </div>
+            </div>
+            <div class="Auth_div">
+                {% if user.is_authenticated %}
+                <div>
+                    {{ user.get_username }}
+                </div>
+                <div>
+                    <a href="{% url 'logout' %}">logout</a>
+                </div>
+                {% else %}
+                <div>
+                    <a href="{% url 'login' %}">login</a>
+                </div>
+                {% endif %}
             </div>
         </div>
+        <div class="content_sec">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div class="footer_div"></div>
     </div>
-    <div class="content_sec">
-    {% block content %}
-    {% endblock content %}
-    </div>
-    <div class="footer_div"></div>
-</div>
 </body>
 
 </html>

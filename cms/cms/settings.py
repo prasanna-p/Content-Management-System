@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,10 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(SUB_DIR,"media")
+
+
+# login authentication redirect url
+
+LOGIN_REDIRECT_URL = '/stories'
+
+LOGOUT_REDIRECT_URL = '/stories'

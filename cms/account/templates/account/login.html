@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="contact_sec">
-    <form method="POST">
+<div class="post_sec">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form_field_div">
             {% for field in form %}
@@ -12,7 +12,7 @@
             <div>{{ field.errors }}</div>
             {% endfor %}
         </div>
-        <input type="submit" value="contact us">
+        <input type="submit" value="login">
     </form>
 </div>
 

@@ -9,6 +9,7 @@ from django.views.generic import DetailView
 from django.views.generic import FormView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # def index(request,*args,**kwargs):
@@ -68,8 +69,9 @@ class PostList(ListView):
 #             return HttpResponse("invalid id")
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin,DetailView):
 
+    login_url = 'login'
     model = post
     template_name = "blog/post_details.html"
     context_object_name = "post"

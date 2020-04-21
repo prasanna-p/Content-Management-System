@@ -132,3 +132,7 @@ MEDIA_ROOT = os.path.join(SUB_DIR,"media")
 LOGIN_REDIRECT_URL = '/stories'
 
 LOGOUT_REDIRECT_URL = '/stories'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

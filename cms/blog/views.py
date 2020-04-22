@@ -10,6 +10,8 @@ from django.views.generic import FormView
 from django.views.generic import CreateView
 from django.views.generic import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 # Create your views here.
 # def index(request,*args,**kwargs):
@@ -176,13 +178,15 @@ class ContactView(FormView):
 #         else:
 #             return render(request,"blog/post.html",context={"form":form})
 
-class PostFormView(CreateView):
+class PostFormView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
 
     # model = post
     # fields = ['title','content','status','image','Catogary','author']
     template_name = "blog/post.html"
     # success_url = reverse("post_detail",kwargs = {"slug":self.slug})
     form_class = PostForm
+    login_url = 'login'
+    permission_required = 'blog.add_post'
 
 
 
@@ -204,8 +208,19 @@ class PostFormView(CreateView):
 #         else:
 #             return render(request,"blog/post.html",context={"form":form})
 
-class UpdatePost(UpdateView):
+class UpdatePost(LoginRequiredMixin,PermissionRequiredMixin,UserPassesTestMixin,UpdateView):
     model = post
     form_class = PostForm
     template_name = "blog/post.html"
+    login_url = 'login'
+    permission_required = 'blog.change_post'
+
+    def test_func(self,*args,**kwargs):
+        slug = self.kwargs.get('slug')
+        post_info = post.objects.get(slug=slug)
+        if self.request.user.get_username() == post_info.author.get_username():
+            return True
+        else:
+            return False
+
     

@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
-
+from account.models import User
 
 
 
@@ -16,12 +16,6 @@ class Catogary(models.Model):
 #title
 #content
 #status
-class author(models.Model):
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
-
 
 class post(models.Model):
     statuses = [
@@ -35,7 +29,7 @@ class post(models.Model):
     status = models.CharField(max_length=1,choices=statuses)
     image = models.ImageField(upload_to="blog/post",blank=True)
     Catogary= models.ForeignKey(Catogary,on_delete=models.CASCADE,related_name="posts")
-    author = models.ForeignKey(author,on_delete=models.CASCADE,related_name="posts")
+    author = models.ForeignKey(User,blank=True,on_delete=models.CASCADE,related_name="posts")
 
     def __str__(self):
         return self.title

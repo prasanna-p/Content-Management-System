@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse,get_object_or_404
 from blog.models import post
 from blog.models import Catogary
 from blog.forms import ContactForm
+from blog.forms import SearchForm
 from blog.forms import PostForm
 from django.views import View
 from django.views.generic import ListView
@@ -36,19 +37,27 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 #         return render(request,"blog/index.html",context={"posts":published_post,"category":category})
 
 
-class PostList(ListView):
+class PostList(ListView,FormView):
     
+    form_class = SearchForm
     model = post
     queryset = post.objects.filter(status = "p")
     template_name = "blog/index.html"
     context_object_name = "posts"
-
+    # success_url = 'stories'
+    
     def get_context_data(self,**kwargs):
+
         context = super().get_context_data(**kwargs)
         context["category"] = Catogary.objects.all()
         return context
 
-
+    def post(self,request,*args,**kwargs):
+        search_string = request._post['search_bar']
+        search_result = self.get_queryset().filter(title__contains=search_string)
+        return render(request, self.template_name, context={"posts":search_result,"category": Catogary.objects.all()})
+        
+        
 # def post_details(request,id,*args,**kwargs):
 
 #     try:
@@ -105,6 +114,7 @@ class FilterPostView(ListView):
 
         context = super().get_context_data(**kwargs)
         context["category"] = Catogary.objects.all()
+        context["form"] = SearchForm
         return context
 
     def get_queryset(self):
@@ -188,6 +198,11 @@ class PostFormView(LoginRequiredMixin,PermissionRequiredMixin,CreateView):
     login_url = 'login'
     permission_required = 'blog.add_post'
 
+    def form_valid(self, form):
+        
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 
 # def update_post_form(request,id,*args,**kwargs):
@@ -223,4 +238,21 @@ class UpdatePost(LoginRequiredMixin,PermissionRequiredMixin,UserPassesTestMixin,
         else:
             return False
 
-    
+
+
+
+#  class FilterPostView(ListView):
+
+#     model = Catogary
+#     template_name = "blog/index.html"
+#     context_object_name = "posts"
+
+#     def get_context_data(self,**kwargs):
+
+#         context = super().get_context_data(**kwargs)
+#         context["category"] = Catogary.objects.all()
+#         return context
+
+#     def get_queryset(self):
+#         cat = get_object_or_404(Catogary,id = self.kwargs['id'])
+#         return cat.posts.filter(status = "p")

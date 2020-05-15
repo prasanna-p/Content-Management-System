@@ -134,3 +134,5 @@ LOGIN_REDIRECT_URL = '/stories'
 LOGOUT_REDIRECT_URL = '/stories'
 
 AUTH_USER_MODEL = 'account.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

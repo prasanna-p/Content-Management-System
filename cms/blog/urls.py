@@ -12,6 +12,7 @@ from blog.views import PostFormView
 # from blog.views import update_post_form
 from blog.views import UpdatePost
 
+
 urlpatterns = [
     path('stories',PostList.as_view()),
     path('<int:id>',FilterPostView.as_view()),
@@ -20,5 +21,7 @@ urlpatterns = [
     path('contact',ContactView.as_view()),
     path('post',PostFormView.as_view()),
     # path('post/<slug:slug>',update_post_form)
-    path('post/<slug:slug>',UpdatePost.as_view())
+    path('post/<slug:slug>',UpdatePost.as_view()),
+   
+    
 ]

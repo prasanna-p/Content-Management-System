@@ -41,3 +41,7 @@ class PostForm(forms.ModelForm):
         model = post
         fields = ['title','content','status','image','Catogary']
 
+class SearchForm(forms.Form):
+
+    search_bar = forms.CharField(max_length=100)
+

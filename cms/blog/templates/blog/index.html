@@ -3,6 +3,19 @@
 <div class="web_page_body">
     <div class="web_page_body2">
         <div class="post_bar">
+            <div class="search_bar_class">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form_field_div">
+                        {% for field in form %}
+                        <div>{{ field.label }}</div>
+                        <div>{{ field }}</div>
+                        <div>{{ field.errors }}</div>
+                        {% endfor %}
+                        <input type="submit" value="Search">
+                    </div>
+                </form>
+        </div>
             <h3 class="post_hedding">Latest Posts</h3>
         </div>
         <div class="filter_sec">
@@ -34,7 +47,7 @@
                             <div class="blog_card_hedding_div">{{ post.title|truncatechars:30 }}</div>
                         </h3>
                         <p class="blog_card_author_name">
-                            {{ post.author.name }}
+                            {{ post.author.get_username }} 
                             <span class="blogcard_publish_date">
                                 |
                                 {{ post.date|date:"d M Y" }}

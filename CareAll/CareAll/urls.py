@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 import account.urls
+import mvt.urls
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -25,4 +26,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/',include('account.urls')),
+    path('',include("mvt.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

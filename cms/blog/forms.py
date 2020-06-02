@@ -1,6 +1,8 @@
 from django import forms
 import re
 from blog.models import post
+from datetime import date
+
 
 class ContactForm(forms.Form):
     country_list = [("IN","India"),("CH","China"),("US","United States")]

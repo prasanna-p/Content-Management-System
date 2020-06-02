@@ -27,7 +27,7 @@
             <div class="Auth_div">
                 {% if user.is_authenticated %}
                 <div>
-                    {{ user.get_username }}
+                   <a href="{% url 'profile' %}">{{ user.get_username }}</a> 
                 </div>
                 <div>
                     <a href="{% url 'logout' %}">logout</a>

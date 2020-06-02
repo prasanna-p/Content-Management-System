@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account'
+    'account',
+    'mvt'
 ]
 
 MIDDLEWARE = [
@@ -107,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -127,6 +128,8 @@ MEDIA_ROOT = os.path.join(SUB_DIR,"media")
 
 AUTH_USER_MODEL = 'account.User'
 
-LOGIN_REDIRECT_URL = ''
+LOGIN_REDIRECT_URL = '/index'
 
-LOGOUT_REDIRECT_URL = ''
+LOGOUT_REDIRECT_URL = '/index'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
